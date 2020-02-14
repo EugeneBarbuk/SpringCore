@@ -1,16 +1,14 @@
 package worckflow;
 
-import Spring.Client;
+import spring.core.beans.Client;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 public class Grow {
     public static void somePrint(Serializable a) {
@@ -24,7 +22,14 @@ public class Grow {
     }
 
     public static void main(String[] args) {
-      //  Integer integer = new Integer(5);
+        File file = new File("logi.txt");
+        try {
+            file.createNewFile();
+            System.out.println(file.canWrite());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //  Integer integer = new Integer(5);
         String s1 = "ForWithMuchWisdomComesMuchSorrowTheMoreKnowledgeTheMoreGrief";
         String s2 = "BeNotHastyInThySpiritToBeAngryForAngerRestethInTheBosomOfFools";
         List<String> list = new ArrayList<>();

@@ -1,4 +1,4 @@
-package Spring;
+package spring.core.beans;
 
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -6,10 +6,15 @@ import java.util.StringJoiner;
 public class Client {
     private String id;
     private String fullName;
+    private String greeting;
 
     public Client(String id, String fullName) {
         this.id = id;
         this.fullName = fullName;
+    }
+
+    public void setGreeting(String greeting) {
+        this.greeting = greeting;
     }
 
     public String getId() {
@@ -47,6 +52,7 @@ public class Client {
         return new StringJoiner(", ", Client.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("fullName='" + fullName + "'")
+                .add("greeting= '" + greeting + "'")
                 .toString();
     }
 }
