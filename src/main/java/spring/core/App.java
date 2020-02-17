@@ -1,5 +1,6 @@
 package spring.core;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -16,6 +17,7 @@ public class App {
     private Map<EventType, EventLogger> loggerMap;
     private Event event;
 
+    @Autowired
     public App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> loggerMap ) {
         this.client = client;
         this.eventLogger = eventLogger;

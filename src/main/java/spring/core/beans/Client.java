@@ -1,8 +1,12 @@
 package spring.core.beans;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 import java.util.StringJoiner;
 
+@Component
 public class Client {
     private String id;
     private String fullName;
