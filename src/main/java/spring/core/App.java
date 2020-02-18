@@ -1,16 +1,18 @@
 package spring.core;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 import spring.core.beans.Client;
 import spring.core.beans.Event;
 import spring.core.beans.EventType;
+import spring.core.interfaces.AwareBean;
 import spring.core.logger.EventLogger;
 
 import java.util.Map;
-
+@Component
 public class App {
     private Client client;
     private EventLogger eventLogger;
@@ -18,31 +20,22 @@ public class App {
     private Event event;
 
     @Autowired
-    public App(Client client, EventLogger eventLogger, Map<EventType, EventLogger> loggerMap ) {
+    public App(Client client, @Qualifier("consoleEventLogger") EventLogger eventLogger, Event event) {
         this.client = client;
         this.eventLogger = eventLogger;
-        this.loggerMap=loggerMap;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
+        this.event=event;
     }
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
+        ConfigurableApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
         App app = (App) applicationContext.getBean("app");
-        app.logEvent("Some event for user 1", EventType.ERROR);
-        ((ConfigurableApplicationContext)applicationContext).close();
+        app.logEvent();
+        applicationContext.close();
 
     }
 
-    private void logEvent(String msg, EventType type) {
-        EventLogger logger = loggerMap.get(type);
-        System.out.println(logger);
-        if (logger == null) {
-            logger = eventLogger;
-        }
+    private void logEvent() {
         event.setMsg(client.toString());
-        logger.logEvent(event);
+        eventLogger.logEvent(event);
     }
 }

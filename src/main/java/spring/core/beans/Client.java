@@ -1,18 +1,21 @@
 package spring.core.beans;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.StringJoiner;
 
 @Component
+@PropertySource("classpath:client.properties")
 public class Client {
     private String id;
     private String fullName;
+    @Value("${client.greeting}")
     private String greeting;
 
-    public Client(String id, String fullName) {
+    public Client(@Value("${client.id}") String id, @Value("${client.name}") String fullName) {
         this.id = id;
         this.fullName = fullName;
     }

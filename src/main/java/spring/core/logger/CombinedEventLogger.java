@@ -1,5 +1,6 @@
 package spring.core.logger;
 
+import org.springframework.stereotype.Component;
 import spring.core.beans.Event;
 
 import java.util.List;
