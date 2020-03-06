@@ -6,7 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -21,34 +24,65 @@ public class Grow {
       //  return cutList.stream().filter(c -> c.getId() == id).findFirst().get().getName();
     }
 
-    public static void main(String[] args) {
-        File file = new File("logi.txt");
-        try {
-            file.createNewFile();
-            System.out.println(file.canWrite());
-        } catch (IOException e) {
-            e.printStackTrace();
+    static String testEnum(VaultEnum vaultEnum) {
+        switch (vaultEnum) {
+            case MYSQL:
+                System.out.println("123");
+                break;
+            case REPOSITORY:
+                System.out.println("456");
+                break;
+            default:
+                System.out.println("789");
         }
-        //  Integer integer = new Integer(5);
-        String s1 = "ForWithMuchWisdomComesMuchSorrowTheMoreKnowledgeTheMoreGrief";
-        String s2 = "BeNotHastyInThySpiritToBeAngryForAngerRestethInTheBosomOfFools";
         List<String> list = new ArrayList<>();
-        for(char c : s1.toCharArray()) { list.add(String.valueOf(c)); }
-        List<String> list1 = new ArrayList<>();
-        for(char c : s2.toCharArray()) { list1.add(String.valueOf(c)); }
-        List<String> sameLetters = list.stream().filter(x -> list1.stream().anyMatch(y -> y.equalsIgnoreCase(x))).collect(Collectors.toList());
-        sameLetters.forEach(System.out::print);
-        String s = null;
-        Predicate<Boolean> isDisplayed = i -> {if(Boolean.TRUE.equals(i)){
-            System.out.println("5");
-           return true;
-        }else {
-            System.out.println("7");}
-            return false;
-        };
+        list.add("A");
+        list.add("B");
+        list = list.stream().filter(l-> l.equals("C")).collect(Collectors.toList());
+        Map<String, Client> map = new HashMap<>();
+        Client client = new Client("10", "AAA");
+        map.put(client.getId(), client);
+      List<Client> clients =  map.values().stream().filter(s->s.getFullName().equalsIgnoreCase("aaa")).collect(Collectors.toList());
 
-        String test =" is it any updates ";
-        System.out.println(new StringBuffer(test).reverse());
+        System.out.println(clients.get(0).getId());
+        return list.isEmpty() ? null: list.get(0);
+    }
+
+    public static void main(String[] args) {
+        String s = "mysql";
+        VaultEnum v = VaultEnum.valueOf(s.toUpperCase());
+        System.out.println(testEnum(v));
+
+
+
+
+//        File file = new File("logi.txt");
+//        try {
+//            file.createNewFile();
+//            System.out.println(file.canWrite());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        //  Integer integer = new Integer(5);
+//        String s1 = "ForWithMuchWisdomComesMuchSorrowTheMoreKnowledgeTheMoreGrief";
+//        String s2 = "BeNotHastyInThySpiritToBeAngryForAngerRestethInTheBosomOfFools";
+//        List<String> list = new ArrayList<>();
+//        for(char c : s1.toCharArray()) { list.add(String.valueOf(c)); }
+//        List<String> list1 = new ArrayList<>();
+//        for(char c : s2.toCharArray()) { list1.add(String.valueOf(c)); }
+//        List<String> sameLetters = list.stream().filter(x -> list1.stream().anyMatch(y -> y.equalsIgnoreCase(x))).collect(Collectors.toList());
+//        sameLetters.forEach(System.out::print);
+//        String s = null;
+//        Predicate<Boolean> isDisplayed = i -> {if(Boolean.TRUE.equals(i)){
+//            System.out.println("5");
+//           return true;
+//        }else {
+//            System.out.println("7");}
+//            return false;
+//        };
+//
+//        String test =" is it any updates ";
+//        System.out.println(new StringBuffer(test).reverse());
 
 
 
