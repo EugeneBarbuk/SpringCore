@@ -40,6 +40,7 @@ public class App {
         if (logger == null) {
             logger = eventLogger;
         }
+        System.out.println("just to test");
         event.setMsg(client.toString());
         logger.logEvent(event);
     }
