@@ -41,6 +41,8 @@ public class App {
             logger = eventLogger;
         }
         System.out.println("just to test");
+        System.out.println("just to test");
+        System.out.println("just to test");
         event.setMsg(client.toString());
         logger.logEvent(event);
     }
